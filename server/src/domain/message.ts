@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-export class Lead {
+export class Message {
   readonly uuid: string;
   readonly message: string;
   readonly phone: string;
