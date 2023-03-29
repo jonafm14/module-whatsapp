@@ -1,10 +1,6 @@
 import { Client, LocalAuth } from "whatsapp-web.js";
 import { image as imageQr } from "qr-image";
 import LeadExternal from "../../domain/message-external.repository";
-
-/**
- * Extendemos los super poderes de whatsapp-web
- */
 class WsTransporter extends Client implements LeadExternal {
   private status = false;
 
@@ -35,7 +31,6 @@ class WsTransporter extends Client implements LeadExternal {
   }
 
   /**
-   * Enviar mensaje de WS
    * @param lead
    * @returns
    */

@@ -10,8 +10,7 @@ function removeExtension(fileName: string): string {
 }
 
 /**
- *
- * @param file tracks.ts
+ * @param file
  */
 function loadRouter(file: string): void {
   const name = removeExtension(file);
