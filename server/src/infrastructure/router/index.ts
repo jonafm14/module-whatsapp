@@ -9,9 +9,6 @@ function removeExtension(fileName: string): string {
   return cleanFileName;
 }
 
-/**
- * @param file
- */
 function loadRouter(file: string): void {
   const name = removeExtension(file);
   if (name !== "index") {

@@ -30,10 +30,6 @@ class WsTransporter extends Client implements LeadExternal {
     });
   }
 
-  /**
-   * @param lead
-   * @returns
-   */
   async sendMsg(lead: { message: string; phone: string }): Promise<any> {
     try {
       if (!this.status) return Promise.resolve({ error: "WAIT_LOGIN" });
