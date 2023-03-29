@@ -5,6 +5,7 @@ import {
   getOrders,
   handleCaptureOrderData,
 } from "./firebase/firebase.controller";
+import sendMessage from "./sendMessage";
 
 const App = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -16,9 +17,10 @@ const App = () => {
     async function fetchData() {
       await getMessages();
       await getOrders();
-      const newCsvData = await handleCaptureOrderData();
-      setJsonData(newCsvData);
+      const newJsonData = await handleCaptureOrderData();
+      setJsonData(newJsonData);
       setDataLoaded(true);
+      sendMessage();
     }
     fetchData();
   }, []);
