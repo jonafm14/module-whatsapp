@@ -22,7 +22,7 @@ const App = () => {
       const newJsonData = await handleCaptureOrderData();
       setJsonData(newJsonData);
       setDataLoaded(true);
-      // sendMessage();
+      sendMessage();
       await getStatus();
       const qrData = await getQr();
       setQrCode(qrData);
