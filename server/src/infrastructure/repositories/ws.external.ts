@@ -1,8 +1,10 @@
 import { Client, LocalAuth } from "whatsapp-web.js";
-import { image as imageQr } from "qr-image";
-import LeadExternal from "../../domain/message-external.repository";
-class WsTransporter extends Client implements LeadExternal {
+import { image as imageQr, image_type } from "qr-image";
+import MessageExternal from "../../domain/whatsapp-external.repository";
+import fs from "fs";
+class WsTransporter extends Client implements MessageExternal {
   private status = false;
+  private qrPath = `${process.cwd()}/tmp/qr.png`;
 
   constructor() {
     super({
@@ -31,6 +33,7 @@ class WsTransporter extends Client implements LeadExternal {
   }
 
   async sendMsg(lead: { message: string; phone: string }): Promise<any> {
+    console.log(this.status);
     try {
       if (!this.status) return Promise.resolve({ error: "WAIT_LOGIN" });
       const { message, phone } = lead;
@@ -45,10 +48,19 @@ class WsTransporter extends Client implements LeadExternal {
     return this.status;
   }
 
-  private generateImage = (base64: string) => {
-    const path = `${process.cwd()}/tmp`;
-    let qr_svg = imageQr(base64, { type: "svg", margin: 4 });
-    qr_svg.pipe(require("fs").createWriteStream(`${path}/qr.svg`));
+  getQr(): string {
+    try {
+      const data = fs.readFileSync(this.qrPath);
+      return Buffer.from(data).toString("base64");
+    } catch (err) {
+      console.error(err);
+      return "";
+    }
+  }
+
+  public generateImage = (base64: string) => {
+    const qr_png = imageQr(base64, { type: "png", margin: 4 });
+    qr_png.pipe(fs.createWriteStream(this.qrPath));
   };
 }
 

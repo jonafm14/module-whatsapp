@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { MessageCreate } from "../../application/lmessage.create";
+import { Request, Response, response } from "express";
+import { MessageCreate } from "../../application/whatsapp.create";
 
 class MessageController {
   constructor(private readonly messageCreator: MessageCreate) {}

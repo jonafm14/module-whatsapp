@@ -11,3 +11,11 @@ export class Message {
     this.phone = phone;
   }
 }
+
+export class Status {
+  readonly status: boolean;
+
+  constructor(status: boolean) {
+    this.status = status;
+  }
+}

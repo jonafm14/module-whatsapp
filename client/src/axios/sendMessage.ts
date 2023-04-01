@@ -1,4 +1,4 @@
-import { csvFile } from "./firebase/firebase.controller";
+import { csvFile } from "../firebase/firebase.controller";
 
 import axios from "axios";
 
@@ -12,7 +12,7 @@ export default function sendMessage() {
     };
 
     axios
-      .post("http://localhost:3001/message", payload)
+      .post("http://localhost:3001/whatsapp", payload)
       .then((response) => {
         console.log(`Mensaje enviado a ${name} con estado: ${status}`);
       })

@@ -5,10 +5,12 @@ import {
   getOrders,
   handleCaptureOrderData,
 } from "./firebase/firebase.controller";
-import sendMessage from "./sendMessage";
+import sendMessage from "./axios/sendMessage";
+import { getStatus, getQr } from "./axios/getRoutes";
 
 const App = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [qrCode, setQrCode] = useState<string>("");
   const [jsonData, setJsonData] = useState<
     { name: string; phone: string | number; status: string }[]
   >([]);
@@ -20,12 +22,14 @@ const App = () => {
       const newJsonData = await handleCaptureOrderData();
       setJsonData(newJsonData);
       setDataLoaded(true);
-      sendMessage();
+      // sendMessage();
+      await getStatus();
+      const qrData = await getQr();
+      setQrCode(qrData);
     }
     fetchData();
   }, []);
   console.log("jsonData", jsonData);
-
   if (!dataLoaded) {
     return <div>Cargando datos...</div>;
   }
@@ -43,6 +47,7 @@ const App = () => {
           </div>
         );
       })}
+      <img src={`data:image/png;base64, ${qrCode}`} alt="QR Code" />
     </div>
   );
 };
