@@ -14,7 +14,7 @@ class WsTransporter extends Client implements MessageExternal {
 
     console.log("Iniciando....");
 
-    this.initialize();
+    console.log(this.initialize());
 
     this.on("ready", () => {
       this.status = true;
@@ -45,6 +45,7 @@ class WsTransporter extends Client implements MessageExternal {
   }
 
   getStatus(): boolean {
+    this.initialize();
     return this.status;
   }
 
