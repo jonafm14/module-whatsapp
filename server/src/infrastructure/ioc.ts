@@ -8,6 +8,9 @@ import MessageController from "./controller/message.controller";
 import WsTransporter from "./repositories/ws.external";
 import StatusController from "./controller/status.controller";
 import QrController from "./controller/qr.controller";
+import Firebase from "./repositories/firebase.external";
+import { FirebaseGet } from "../application/firestore.create";
+import FirebaseController from "./controller/firebase.controller";
 
 const container = new ContainerBuilder();
 
@@ -31,5 +34,25 @@ container
 container.register("qr.send", QrSend).addArgument([wsTransporter]);
 const qrSend = container.get("qr.send");
 container.register("qr.controller", QrController).addArgument(qrSend);
+
+container.register("firebase.transporter", Firebase);
+const firebaseTransporter = container.get("firebase.transporter");
+
+container
+  .register("firebase.get", FirebaseGet)
+  .addArgument([firebaseTransporter]);
+const messageGet = container.get("firebase.get");
+container
+  .register("firebase.controller", FirebaseController)
+  .addArgument(messageGet);
+const orderGet = container.get("firebase.get");
+container
+  .register("firebase.controller", FirebaseController)
+  .addArgument(orderGet);
+
+const orderMessageGet = container.get("firebase.get");
+container
+  .register("firebase.controller", FirebaseController)
+  .addArgument(orderMessageGet);
 
 export default container;

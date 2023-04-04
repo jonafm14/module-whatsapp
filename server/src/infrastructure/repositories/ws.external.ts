@@ -1,5 +1,5 @@
 import { Client, LocalAuth } from "whatsapp-web.js";
-import { image as imageQr, image_type } from "qr-image";
+import { image as imageQr } from "qr-image";
 import MessageExternal from "../../domain/whatsapp-external.repository";
 import fs from "fs";
 class WsTransporter extends Client implements MessageExternal {
