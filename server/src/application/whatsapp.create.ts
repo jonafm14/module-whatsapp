@@ -1,4 +1,4 @@
-import WhatsappExternal from "../domain/whatsapp-external.repository";
+import WhatsappExternal from "../domain/whatsapp-external.interface";
 
 export class MessageCreate {
   private messageExternal: WhatsappExternal;
