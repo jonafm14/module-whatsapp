@@ -33,7 +33,6 @@ class WsTransporter extends Client implements MessageExternal {
   }
 
   async sendMsg(lead: { message: string; phone: string }): Promise<any> {
-    console.log(this.status);
     try {
       if (!this.status) return Promise.resolve({ error: "WAIT_LOGIN" });
       const { message, phone } = lead;
