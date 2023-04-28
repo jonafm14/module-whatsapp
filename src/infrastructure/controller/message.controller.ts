@@ -6,11 +6,14 @@ class MessageController {
 
   public sendController = async ({ body }: Request, res: Response) => {
     const { message, phone } = body;
-    const response = await this.messageCreator.sendMessage({
+    try{const response = await this.messageCreator.sendMessage({
       message,
       phone,
     });
     res.send(response);
+  }catch(e){
+      console.log(e)
+    }
   };
 }
 
